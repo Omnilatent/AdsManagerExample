@@ -68,6 +68,18 @@ namespace Omnilatent.AdsMediation.Example
             AdsManager.Instance.ShowBanner(AdPlacement.Banner, new BannerTransform(AdPosition.Top));
         }
 
+        public void TestOpenAd()
+        {
+            AdsManager.Instance.RequestAppOpenAd(AdPlacement.App_Open_Ad, (success) =>
+            {
+                if (success) AdsManager.Instance.ShowAppOpenAd(AdPlacement.App_Open_Ad,
+                    (isClosed) =>
+                    {
+                        SetText("App open ad closed");
+                    });
+            });
+        }
+
         void SetText(string text)
         {
             debugTextField.text = text;
