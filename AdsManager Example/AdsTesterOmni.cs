@@ -55,12 +55,20 @@ namespace Omnilatent.AdsMediation.Example
                 });
         }
 
-        public void TestReward()
+        public void TestReward1()
         {
-            AdsManager.Reward((success) =>
+            AdsManager.Reward(AdPlacement.Reward, (result) =>
             {
-                SetText($"Reward success: {success}");
-            }, AdPlacement.Reward);
+                SetText($"Reward result: {result.type}");
+            });
+        }
+
+        public void TestReward2()
+        {
+            AdsManager.Reward(AdPlacement.Reward2, (result) =>
+            {
+                SetText($"Reward 2 result: {result.type}");
+            });
         }
 
         public void TestTopBanner()
