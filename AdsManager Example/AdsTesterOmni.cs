@@ -12,7 +12,7 @@ namespace Omnilatent.AdsMediation.Example
 
         private void Start()
         {
-            SS.View.Manager.LoadingSceneName = DLoadingController.SCENE_NAME;
+            // SS.View.Manager.LoadingSceneName = DLoadingController.SCENE_NAME;
             Application.logMessageReceived += (condition, trace, type) =>
             {
                 SetText(condition);
@@ -45,7 +45,7 @@ namespace Omnilatent.AdsMediation.Example
 
         public void RequestInterstitialRewarded()
         {
-            AdsManager.Instance.RequestInterstitialRewardedNoShow(AdPlacement.RewardedInterstitial,
+            /*AdsManager.Instance.RequestInterstitialRewardedNoShow(AdPlacement.RewardedInterstitial,
                 (success) =>
                 {
                     if (success.type == RewardResult.Type.Finished)
@@ -58,7 +58,7 @@ namespace Omnilatent.AdsMediation.Example
                     }
 
                     SetText($"Interstitial Rewarded: {success}");
-                });
+                });*/
         }
 
         public void TestReward1()
@@ -71,7 +71,7 @@ namespace Omnilatent.AdsMediation.Example
 
         public void TestReward2()
         {
-            AdsManager.Reward(AdPlacement.Reward2, (result) =>
+            AdsManager.Reward(AdPlacement.Reward_Common, (result) =>
             {
                 SetText($"Reward 2 result: {result.type}");
             });
