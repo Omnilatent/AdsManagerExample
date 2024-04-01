@@ -13,6 +13,10 @@ namespace Omnilatent.AdsMediation.Example
         private void Start()
         {
             SS.View.Manager.LoadingSceneName = DLoadingController.SCENE_NAME;
+            Application.logMessageReceived += (condition, trace, type) =>
+            {
+                SetText(condition);
+            };
 
             /*FirebaseManager.LogEvent("312a"); //test start with number
             FirebaseManager.LogEvent("a312a", "a a", 0); //test param contain space
@@ -34,6 +38,7 @@ namespace Omnilatent.AdsMediation.Example
                 {
                     AdsManager.Instance.ShowInterstitial(AdPlacement.Interstitial);
                 }
+
                 SetText($"Interstitial Request: {success}");
             });
         }
@@ -51,6 +56,7 @@ namespace Omnilatent.AdsMediation.Example
                                 SetText($"Interstitial Rewarded show: {watched.type}");
                             });
                     }
+
                     SetText($"Interstitial Rewarded: {success}");
                 });
         }
@@ -71,20 +77,74 @@ namespace Omnilatent.AdsMediation.Example
             });
         }
 
-        public void TestTopBanner()
+        public void ShowTopBanner()
         {
-            AdsManager.Instance.ShowBanner(AdPlacement.Banner, new BannerTransform(AdPosition.Top));
+            AdsManager.Instance.ShowBanner(AdPlacement.Banner_Common, new BannerTransform(AdPosition.Top));
+        }
+
+        public void ShowBottomBanner()
+        {
+            AdsManager.Instance.ShowBanner(AdPlacement.Banner_Bottom, new BannerTransform(AdPosition.Bottom));
+        }
+
+        public void ShowCollapsibleBottomBanner()
+        {
+            AdsManager.Instance.ShowBanner(AdPlacement.Banner_CollapsibleBottom, new BannerTransform(AdPosition.Bottom)
+            {
+                Collapsible = true
+            });
+        }
+
+        public void HideBanner()
+        {
+            AdsManager.Instance.HideBanner();
+        }
+
+        public void HideTopBanner()
+        {
+            AdsManager.Instance.HideBanner(AdPlacement.Banner_Common);
+        }
+
+        public void HideBottomBanner()
+        {
+            AdsManager.Instance.HideBanner(AdPlacement.Banner_Bottom);
+        }
+
+        public void HideCollapsibleBottomBanner()
+        {
+            AdsManager.Instance.HideBanner(AdPlacement.Banner_CollapsibleBottom);
+        }
+
+        public void DestroyBanner()
+        {
+            AdsManager.Instance.DestroyBanner();
+        }
+
+        public void DestroyTopBanner()
+        {
+            AdsManager.Instance.DestroyBanner(AdPlacement.Banner_Common);
+        }
+
+        public void DestroyBottomBanner()
+        {
+            AdsManager.Instance.DestroyBanner(AdPlacement.Banner_Bottom);
+        }
+
+        public void DestroyCollapsibleBottomBanner()
+        {
+            AdsManager.Instance.DestroyBanner(AdPlacement.Banner_CollapsibleBottom);
         }
 
         public void TestOpenAd()
         {
             AdsManager.Instance.RequestAppOpenAd(AdPlacement.App_Open_Ad, (success) =>
             {
-                if (success) AdsManager.Instance.ShowAppOpenAd(AdPlacement.App_Open_Ad,
-                    (isClosed) =>
-                    {
-                        SetText("App open ad closed");
-                    });
+                if (success)
+                    AdsManager.Instance.ShowAppOpenAd(AdPlacement.App_Open_Ad,
+                        (isClosed) =>
+                        {
+                            SetText("App open ad closed");
+                        });
             });
         }
 
